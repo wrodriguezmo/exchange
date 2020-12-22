@@ -33,14 +33,20 @@ export default {
     },
     computed: {
         loggingIn () {
+            this.$store.state.authentication.status.loggingIn;
             return false
         }
+    },
+    created () {
+        // reset login status
+        this.$store.dispatch('authentication/logout');
     },
     methods: {
         handleSubmit () { 
             this.submitted = true;
             const { username, password } = this;
             if (username && password) {
+                dispatch('authentication/login', { username, password }); //eslint-disable-line
             }
         }
     }
