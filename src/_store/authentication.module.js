@@ -1,3 +1,6 @@
+import { userService } from '../_services';
+import { router } from '../_helper';
+
 const user = JSON.parse(localStorage.getItem('user'));
 const initialState = user
     ? { status: { loggedIn: true }, user }
@@ -9,10 +12,20 @@ export const authentication = {
     actions: {
         login({ dispatch, commit }, { username, password }) { //eslint-disable-line
             commit('loginRequest', { username });
-            // some code about login with request to api rest
+            userService.login(username, password)
+                .then(
+                    user => {
+                        commit('loginSuccess', user);
+                        router.push('/');
+                    },
+                    error => {
+                        commit('loginFailure', error);
+                        dispatch('alert/error', error, { root: true });
+                    }
+                );
         },
         logout({ commit }) {
-            // some code about login with request to api rest
+            userService.logout();
             commit('logout');
         }
     },
