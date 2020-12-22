@@ -37,11 +37,10 @@ export default {
         }
     },
     methods: {
-        handleSubmit (e) {
+        handleSubmit () { 
             this.submitted = true;
             const { username, password } = this;
             if (username && password) {
-                //send... , { username, password });
             }
         }
     }
