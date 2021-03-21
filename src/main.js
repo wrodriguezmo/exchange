@@ -5,5 +5,5 @@ import App from './App.vue'
 import router from './_helper/router'
 import { store } from './_store';
 
-createApp(App).use(router, store, Vuex).mount('#app')
+createApp(App).use(Vuex).use(router).use(store).mount('#app')
 
